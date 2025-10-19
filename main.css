@@ -46,7 +46,7 @@
             text-align: center;
         }
 
-        .btn {
+        .Btn {
             background-color: #f0f0f0;
             border: 2px solid black;
             font-size: 1.5em;
@@ -55,8 +55,8 @@
             cursor: pointer;
         }
 
-        .btn:hover,
-        .btn:focus {
+        .Btn:hover,
+        .Btn:focus {
             background-color: black;
             border: 2px solid #f0f0f0;
             color: #f0f0f0;

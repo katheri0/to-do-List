@@ -14,17 +14,19 @@
             // Clear the table body
             tableBody.innerHTML = "";
             // Render each note as a row in the table
+            var row;
             notes.forEach(function (note) {
-                var row = document.createElement("tr");
+                row = document.createElement("tr");
                 row.innerHTML = `
-<td>${note.id}</td>
-<td>${note.text}</td>
-<td>
-<input type="checkbox"
-${note.isDone ? "checked" : ""}
-onclick="updateNoteState(event)">
-</td>
-`;
+                <td>${note.id}</td>
+                <td>${note.text}</td>
+                <td>
+                <input type="checkbox"
+                ${note.isDone ? "checked" : ""}
+                onclick="updateNoteState(event)">
+                <button type="button" class="btn btn-danger" onclick="deleteNotes(${note.id})">Delete</button>
+                </td>
+                `;
                 tableBody.appendChild(row);
             });
         }
@@ -69,3 +71,9 @@ onclick="updateNoteState(event)">
         function saveNotes() {
             localStorage.setItem("notes", JSON.stringify(notes));
         }
+function deleteNotes(id)
+{
+  notes =  notes.filter(item=> item.id !== id)
+   saveNotes();
+   renderNotes();
+}
