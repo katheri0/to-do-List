@@ -24,7 +24,7 @@
                 <input type="checkbox"
                 ${note.isDone ? "checked" : ""}
                 onclick="updateNoteState(event)">
-                <button type="button" class="btn btn-danger" onclick="deleteNotes(${note.id})">Delete</button>
+                <button  style="float: right;" type="button" class="btn btn-danger" onclick="deleteNotes(${note.id})">Delete</button>
                 </td>
                 `;
                 tableBody.appendChild(row);

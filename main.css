@@ -40,6 +40,7 @@
             margin: 20px auto;
             border: 1px solid #ddd;
             padding: 10px;
+            resize: both !important;
         }
 
         .center {
@@ -47,7 +48,7 @@
         }
 
         .Btn {
-            background-color: #f0f0f0;
+            background-color: #dfdede;
             border: 2px solid black;
             font-size: 1.5em;
             padding: 10px 20px;
