@@ -1,79 +1,80 @@
-  // Get the table body element
-        var tableBody = document.getElementById("todo-items");
+// Get the table body element
+var tableBody = document.getElementById("todo-items");
 
-        // Get Textarea
-        var textarea = document.querySelector("textarea");
-        // Get the add note button
-        var addNoteButton = document.getElementById("add-note");
-        addNoteButton.addEventListener("click", addNote);
-        // Load notes from local storage
-        var notes = JSON.parse(localStorage.getItem("notes")) || [];
-        // Render existing notes
-        renderNotes();
-        function renderNotes() {
-            // Clear the table body
-            tableBody.innerHTML = "";
-            // Render each note as a row in the table
-            var row;
-            notes.forEach(function (note) {
-                row = document.createElement("tr");
-                row.innerHTML = `
-                <td>${note.id}</td>
-                <td>${note.text}</td>
-                <td>
-                <input type="checkbox"
+// Get Textarea
+var textarea = document.querySelector("textarea");
+// Get the add note button
+var addNoteButton = document.getElementById("add-note");
+addNoteButton.addEventListener("click", addNote);
+// Load notes from local storage
+var notes = JSON.parse(localStorage.getItem("notes")) || [];
+// Render existing notes
+renderNotes();
+function renderNotes() {
+    // Clear the table body
+    tableBody.innerHTML = "";
+    // Render each note as a row in the table
+    var row;
+    notes.forEach(function (note) {
+        row = document.createElement("tr");
+        row.innerHTML = `
+                <td class=""> ${note.id}</td>
+                <td><input  style="float: left;" type="checkbox" class="text-center"
                 ${note.isDone ? "checked" : ""}
-                onclick="updateNoteState(event)">
-                <button  style="float: right;" type="button" class="btn btn-danger" onclick="deleteNotes(${note.id})">Delete</button>
-                </td>
+                onclick="updateNoteState(event)"><td/>
+                <span style="text-algin:center;" class=" ">${note.text}</span>
+         
+                <button  style="float: right;" type="button" class="mx-4 btn btn-info" onclick="EditNotes(${note.id})">Edit</button>
+                <button  style="float: right;" type="button" class="mx-4 btn btn-danger" onclick="deleteNotes(${note.id})">Delete</button>
                 `;
-                tableBody.appendChild(row);
-            });
-        }
-        function addNote() {
-            if (textarea.value) {
-                // Generate a unique ID for the note
-                var noteId = notes.length > 0 ? notes[notes.length - 1].id + 1 : 1;
-                // Create a new note object
-                var newNote = {
-                    id: noteId,
-                    text: textarea.value,
-                    isDone: false,
-                };
-                // Add the new note to the array
-                notes.push(newNote);
-                // Save notes to local storage
-                saveNotes();
-                // Render the updated notes
-                renderNotes();
-                textarea.value = "";
-            }
-        }
-
-
-        // checkbox click
-        function updateNoteState(event) {
-            var checkbox = event.target;
-            var noteId = parseInt(
-                checkbox.parentElement.previousElementSibling.previousElementSibling
-                    .innerText
-            );
-            // Find the note with the corresponding ID
-            var note = notes.find(function (note) {
-                return note.id === noteId;
-            });
-            // Update the note's isDone property
-            note.isDone = checkbox.checked;
-            // Save notes to local storage
-            saveNotes();
-        }
+        tableBody.appendChild(row);
+    });
+}
+function addNote() {
+    if (textarea.value) {
+        // Generate a unique ID for the note
+        var noteId = notes.length > 0 ? notes[notes.length - 1].id + 1 : 1;
+        // Create a new note object
+        var newNote = {
+            id: noteId,
+            text: textarea.value,
+            isDone: false,
+        };
+        // Add the new note to the array
+        notes.push(newNote);
         // Save notes to local storage
-        function saveNotes() {
-            localStorage.setItem("notes", JSON.stringify(notes));
-        }
-function deleteNotes(id)
+        saveNotes();
+        // Render the updated notes
+        renderNotes();
+        textarea.value = "";
+    }
+}
+function EditNotes(id)
 {
-  notes =  notes.filter(item=> item.id !== id)
-   saveNotes();
-   renderNotes();
+
+}
+// checkbox click
+function updateNoteState(event) {
+    var checkbox = event.target;
+    var noteId = parseInt(
+        checkbox.parentElement.previousElementSibling.previousElementSibling
+            .innerText
+    );
+    // Find the note with the corresponding ID
+    var note = notes.find(function (note) {
+        return note.id === noteId;
+    });
+    // Update the note's isDone property
+    note.isDone = checkbox.checked;
+    // Save notes to local storage
+    saveNotes();
+}
+// Save notes to local storage
+function saveNotes() {
+    localStorage.setItem("notes", JSON.stringify(notes));
+}
+function deleteNotes(id) {
+    notes = notes.filter(item => item.id !== id)
+    saveNotes();
+    renderNotes();
 }

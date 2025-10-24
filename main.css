@@ -1,11 +1,6 @@
-  *,
-        *::after,
-        *::before {
-            box-sizing: border-box;
-        }
 
         table {
-            width: 100%;
+            width: 50%;
             max-width: 800px;
             margin: auto;
             border-collapse: collapse;
@@ -13,27 +8,13 @@
 
         th,
         td {
-            padding: 8px;
-            text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
-        th {
-            background-color: #f2f2f2;
-        }
+   
 
-        tr:nth-child(even) {
-            background-color: #f0f0f0;
 
-        }
 
-        tr:hover {
-            background-color: #f5f5f5 !important;
-        }
-
-        button {
-            margin-top: 10px;
-        }
 
         textarea {
             border-radius: 10px;
@@ -41,24 +22,4 @@
             border: 1px solid #ddd;
             padding: 10px;
             resize: both !important;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .Btn {
-            background-color: #dfdede;
-            border: 2px solid black;
-            font-size: 1.5em;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-
-        .Btn:hover,
-        .Btn:focus {
-            background-color: black;
-            border: 2px solid #f0f0f0;
-            color: #f0f0f0;
         }
