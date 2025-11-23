@@ -18,41 +18,68 @@ function renderNotes() {
     notes.forEach(function (note) {
         row = document.createElement("tr");
         row.innerHTML = `
-                <td class=""> ${note.id}</td>
-                <td><input  style="float: left;" type="checkbox" class="text-center"
-                ${note.isDone ? "checked" : ""}
-                onclick="updateNoteState(event)"><td/>
-                <span style="text-algin:center;" class=" ">${note.text}</span>
-         
-                <button  style="float: right;" type="button" class="mx-4 btn btn-info" onclick="EditNotes(${note.id})">Edit</button>
-                <button  style="float: right;" type="button" class="mx-4 btn btn-danger" onclick="deleteNotes(${note.id})">Delete</button>
-                `;
+    <td class="p-2 text-center">${note.id}</td>
+
+    <td class="p-2 text-center">
+        <input 
+            type="checkbox" 
+            ${note.isDone ? "checked" : ""}
+            onclick="updateNoteState(event)"
+        />
+    </td>
+
+    <td class="p-2 flex justify-between items-center">
+        <span class="${note.isDone ? 'line-through text-gray-500' : ''}">
+            ${note.text}
+        </span>
+
+        <div class="flex gap-2">
+            <button class="btn btn-info btn-sm" onclick="EditNotes(${note.id})">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteNotes(${note.id})">Delete</button>
+        </div>
+    </td>
+`;
+
         tableBody.appendChild(row);
     });
 }
 function addNote() {
-    if (textarea.value) {
+    if (!textarea.value) return;
+    if (editId === null) {
         // Generate a unique ID for the note
         var noteId = notes.length > 0 ? notes[notes.length - 1].id + 1 : 1;
         // Create a new note object
-        var newNote = {
+        notes.push({
             id: noteId,
             text: textarea.value,
-            isDone: false,
-        };
-        // Add the new note to the array
-        notes.push(newNote);
-        // Save notes to local storage
-        saveNotes();
-        // Render the updated notes
-        renderNotes();
-        textarea.value = "";
+            isDone: false
+        });
     }
-}
-function EditNotes(id)
-{
+    else {
+        var note = notes.find(n => n.id == editId)
+        note.text = textarea.value;
+        editId = null;
+        addNoteButton.textContent = "Add Note";
+    }
 
+    // Save notes to local storage
+    saveNotes();
+    // Render the updated notes
+    renderNotes();
+    textarea.value = "";
 }
+
+
+var editId = null;
+
+function EditNotes(id) {
+    var note = notes.find(n => n.id === id);
+    textarea.value = note.text;
+    editId = id;
+
+    addNoteButton.textContent = "Update Note";
+}
+
 // checkbox click
 function updateNoteState(event) {
     var checkbox = event.target;

@@ -1,25 +1,24 @@
+table td,
+table th {
+    padding: 12px;
+    vertical-align: middle;
+}
 
-        table {
-            width: 50%;
-            max-width: 800px;
-            margin: auto;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid #ddd;
-        }
-
-   
+.btn-sm {
+    padding: 4px 8px !important;
+    font-size: 0.875rem !important;
+}
 
 
 
 
-        textarea {
-            border-radius: 10px;
-            margin: 20px auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            resize: both !important;
-        }
+
+
+
+textarea {
+    border-radius: 10px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    resize: both !important;
+}
